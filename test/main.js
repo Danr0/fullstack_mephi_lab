@@ -2,19 +2,6 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-function combine(arr,ch,output){
-    if(ch<arr.length){
-        for(let i=0; i<arr.length;i++){
-            for(let j=0; j<output.length;j++){
-                output.push(""+arr[i]+output[j]);
-            }
-            output.push(arr[i]);
-        }
-        //combine(arr,ch+1,output);
-    }
-
-}
-
 
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

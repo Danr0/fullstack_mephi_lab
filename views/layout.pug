@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        div.text-left
+            nav
+                img.hamburger-menu(src="/home.svg" alt="Navigation Menu")
+                ul(class="reveal")
+                    li
+                        a(href='/') Home
+                    li
+                        a(href='/api/Pogonin/lab1/ex2') Ex2
+                    li
+                        a(href='/api/Pogonin/lab1/ex12') Ex12
+                    li
+                        a(href='/api/Pogonin/lab1/ex15') Ex15
+        title= title
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        block content
+
+    //script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+    //script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+    //script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
+
+    div.text-center
+        - var pClasses=['mt-5', 'mb-3', 'text-muted'];
+        p(class=pClasses) Created by Danr0 with &hearts;

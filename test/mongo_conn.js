@@ -1,4 +1,4 @@
-const config = require('./config.js') //file with login and password
+const config = require('../config.js') //file with login and password
 const mongoose = require('mongoose');
 
 let dbname = 'test'; // change me
