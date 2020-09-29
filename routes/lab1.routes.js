@@ -27,7 +27,7 @@ router.post("/ex2", auth, async (req, res) => {
     };
     var subsets = combine(arr, 0);
     subsets.unshift([]);
-    return res.send(subsets);
+    return res.render('result',{res:subsets});
 })
 
 
@@ -43,7 +43,7 @@ router.post("/ex12", auth, async (req, res) => {
                 return res.status(400).send("Multiple chars detected")
             }
             else {
-                return res.send(str2);
+                return res.render('result',{res:str2});
             }
         }
 
@@ -57,7 +57,9 @@ router.post('/ex15', async (req, res) => {
         return re.test(String(email).toLowerCase());
     }
     let mail = (req.body.mail);
-    return res.send(("" + validateEmail(mail) + "\n<div>/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/<\div>"))
+    //return res.send(("" + validateEmail(mail) + "\n<div>/^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/<\div>"))
+    let result = ("" + validateEmail(mail));
+    res.render('result',{res:result});
 })
 
 module.exports = router;
