@@ -8,7 +8,9 @@ const logger = require("./middleware/loggers")
 const app = express();
 const pug = require('pug');
 const bodyParser = require('body-parser');
-//const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
+const passport = require("passport");
+const { User } = require("./models/user.model");
 
 
 //use config module to get the private_key, if no private key set, end the application
@@ -30,7 +32,28 @@ mongoose
 app.set("view engine", "pug");
 app.use(express.json());
 app.use(express.static('public'))
-//app.use(cookieParser());
+app.use(cookieParser());
+
+const JwtStrategy = require('passport-jwt').Strategy;
+let opts = {}
+opts.secretOrKey = config.private_key;
+opts.jwtFromRequest =  function(req) {
+    let token = null;
+    if (req && req.cookies) token = req.cookies['jwt'];
+    return token;
+};
+passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+    User.findOne({_id: jwt_payload._id}, function(err, user) {
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            return done(null, user);
+        } else {
+            return done(null, false);
+        }
+    });
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger.pathLogger);

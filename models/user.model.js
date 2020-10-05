@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 3,
-        maxlength: 50
+        maxlength: 50,
+        unique: true
     },
     email: {
         type: String,
@@ -30,7 +31,9 @@ const UserSchema = new mongoose.Schema({
 //custom method to generate authToken
 UserSchema.methods.generateAuthToken = function() {
     const key = config.private_key;
-    const token = jwt.sign({ _id: this._id}, key); //get the private key from the config file -> environment variable
+    const token = jwt.sign({ _id: this._id}, key, {
+        expiresIn: 6000 // in seconds
+    }); //get the private key from the config file -> environment variable
     return token;
 }
 

@@ -1,9 +1,10 @@
-const auth = require("../middleware/auth");
+const auth = require("../test/auth");
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 
 
-router.post("/ex2", auth, async (req, res) => {
+router.post("/ex2", passport.authenticate(`jwt`, { session: false }), async (req, res) => {
     let arr = (req.body.arr).split(",");
     var combine = function(a, min) {
         var fn = function(n, src, got, all) {
@@ -31,7 +32,7 @@ router.post("/ex2", auth, async (req, res) => {
 })
 
 
-router.post("/ex12", auth, async (req, res) => {
+router.post("/ex12", passport.authenticate(`jwt`, { session: false }), async (req, res) => {
         let str = (req.body.str);
         let ch = (req.body.ch1);
         if(str.search(ch)==-1){
@@ -51,7 +52,7 @@ router.post("/ex12", auth, async (req, res) => {
     })
 
 
-router.post('/ex15', async (req, res) => {
+router.post('/ex15', passport.authenticate(`jwt`, { session: false }), async (req, res) => {
     function validateEmail(email) {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());

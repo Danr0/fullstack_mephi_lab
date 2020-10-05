@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    head
+        script.
+            window.onload = function () {
+                function setUsername(username) {
+                    return "Welcome "+username;
+                }
+
+                var user = !{JSON.stringify(user)};
+                document.getElementById("welcome-user").innerHTML = setUsername(user.username);
+            };
+
+    body
+        div.text-center
+            div(id="welcome-user")
